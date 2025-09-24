@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=WebShop
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ WebShop\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name
+comment1.target=WebShop(java.lang.String)
+comment2.params=p
+comment2.target=void\ add(Phone)
+comment3.params=low\ high
+comment3.target=Phone\ phoneInPriceRange(int,\ int)
+comment4.params=
+comment4.target=Phone\ cheapestPhone()
+comment5.params=
+comment5.target=void\ printWebShop()
+numComments=6

@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=TestDriver
+comment1.params=noOfDice
+comment1.target=void\ test(java.util.ArrayList)
+comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
+comment2.params=noOfRolls
+comment2.target=void\ test4638(int)
+comment3.params=noOfDice\ noOfRolls
+comment3.target=void\ testMultiple(java.util.ArrayList,\ int)
+comment4.params=
+comment4.target=void\ TestCompareDieCups()
+comment5.params=d1\ d2\ noOfRolls
+comment5.target=void\ compareDieCups(java.util.ArrayList,\ java.util.ArrayList,\ int)
+comment6.params=digits
+comment6.target=java.util.ArrayList\ createArrayList(int)
+numComments=7

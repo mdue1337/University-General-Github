@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Persons
+comment1.params=
+comment1.target=Persons()
+comment2.params=p
+comment2.target=void\ addPerson(Person)
+comment3.params=name
+comment3.target=Person\ findByName(java.lang.String)
+comment4.params=age
+comment4.target=java.util.List\ findOlderThan(int)
+comment5.params=age
+comment5.target=long\ countOlderThan(int)
+comment6.params=age
+comment6.target=int\ sumOfAgesOlderThan(int)
+comment7.params=args
+comment7.target=void\ main(java.lang.String[])
+numComments=8

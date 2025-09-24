@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Finder
+comment1.params=list\ condition
+comment1.target=java.lang.Object\ findOne(java.util.List,\ java.util.function.Predicate)
+comment2.params=list\ condition
+comment2.target=java.util.List\ findAll(java.util.List,\ java.util.function.Predicate)
+comment3.params=list\ condition
+comment3.target=long\ findNoOf(java.util.List,\ java.util.function.Predicate)
+comment4.params=list\ condition\ mapper
+comment4.target=int\ findSumOf(java.util.List,\ java.util.function.Predicate,\ java.util.function.ToIntFunction)
+numComments=5

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ByAgeName
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ByAgeName\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=p1\ p2
+comment1.target=int\ compare(Person,\ Person)
+comment1.text=\r\n\ Returnerer\ negativt\ hvis\ this\ <\ p,\ \r\n\ Returnerer\ 0\ hvis\ this\ \=\ p,\r\n\ Returnerer\ positivt\ hvis\ this\ >\ p\r\n\ \r\n\ Hvis\ de\ er\ lige\ gamle,\ s\u00E5\ sorterer\ efter\ navn\ i\ alphabetisk.\r\n
+numComments=2

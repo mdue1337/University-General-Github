@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Turtle
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Turtle\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name\ isMale\ age
+comment1.target=Turtle(java.lang.String,\ boolean,\ int)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment3.params=
+comment3.target=int\ getAge()
+comment4.params=
+comment4.target=boolean\ isMale()
+numComments=5
