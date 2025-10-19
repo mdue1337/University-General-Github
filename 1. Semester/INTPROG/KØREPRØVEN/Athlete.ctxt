@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Athlete
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Athlete\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=name\ male\ weight
+comment1.target=Athlete(java.lang.String,\ boolean,\ int)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+comment3.params=
+comment3.target=int\ getWeight()
+comment4.params=
+comment4.target=java.lang.String\ getName()
+comment5.params=
+comment5.target=boolean\ isMale()
+comment6.params=a
+comment6.target=int\ compareTo(Athlete)
+numComments=7

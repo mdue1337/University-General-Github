@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=FitnessCentre
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ FitnessCentre\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=street
+comment1.target=FitnessCentre(java.lang.String)
+comment2.params=a
+comment2.target=void\ addAthlete(Athlete)
+comment3.params=min\ max
+comment3.target=java.util.ArrayList\ findAthletes(int,\ int)
+comment4.params=name
+comment4.target=Athlete\ heavyAthlete(java.lang.String)
+comment5.params=
+comment5.target=void\ printFitnessCentre()
+comment6.params=male
+comment6.target=int\ findWeight(boolean)
+comment7.params=minWeight
+comment7.target=long\ heavyAthletes(int)
+numComments=8

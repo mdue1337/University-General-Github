@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Shop
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Shop\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=owner
+comment1.target=Shop(java.lang.String)
+comment2.params=v
+comment2.target=void\ add(Vegetable)
+comment3.params=organic
+comment3.target=Vegetable\ find(boolean)
+comment4.params=
+comment4.target=boolean\ organic()
+comment5.params=
+comment5.target=void\ printShop()
+numComments=6
