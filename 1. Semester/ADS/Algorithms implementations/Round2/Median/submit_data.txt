@@ -1,0 +1,7 @@
+median-2
+ads25-dj1412
+x0802A6Xmu6tYVPj
+
+This file contains the Task ID, username and password
+last used when submitting a solution.
+This file is used when you call Submit.submit() with no arguments.

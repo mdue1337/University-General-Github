@@ -1,38 +1,40 @@
 // Version: 20200917
 // Handin done by:
-//   <id 1> <name 1>
-//   <id 2> <name 2>
-//   <id 3> <name 3>
+//   AU786751 Martin Due
+//   AU806016 Filip Raeburn
+//   AU804976 Matthias W. Jensen
 // Contributions:
-//   <name 1> <contribution>
-//   <name 2> <contribution>
-//   <name 3> <contribution>
+//   Teoretisk snak og diskussion af opgaven udført af alle medlemmer.
+//   Implementering udført af Martin Due & Filip Raeburn
 
 import java.util.*;
 public class Dyck {
     public boolean checkParentheses(ArrayList<Character> input) {
-        // make a stack with all chars
-        // compare if the top of the stack is a closing bracket
-        // if it is, check if the next char is the corresponding opening bracket
-        // if it is, pop both chars from the stack
-        // if it is not, return false
-        // if the stack is empty at the end, return true
+        // We make a stack to store the opening parentheses
         Stack<Character> stack = new Stack<>();
 
+        // We iterate through each character in the input
         for (char c : input) {
-            if (c == '(' || c == '[') {
+            // add opening parentheses to the stack
+            if (c == '(' || c == '[' || c=='{') {
                 stack.push(c);
-            } else if (c == ')') {
-                if (stack.isEmpty() || stack.pop() != '(') {
-                    return false;
-                }
-            } else if (c == ']') {
-                if (stack.isEmpty() || stack.pop() != '[') {
+            }
+            // check closing parentheses against the stack
+            else if (c == ')' || c == ']') {
+                // if stack is empty, there is no matching opening parenthesis
+                if (stack.isEmpty()) return false;
+
+                // check if the top of the stack matches the closing parenthesis
+                char top = stack.peek();
+                if ((c == ')' && top == '(') || (c == ']' && top == '[')) {
+                    // if it does remove the opening parenthesis from the stack
+                    stack.pop();
+                } else {
                     return false;
                 }
             }
         }
-        return true;
+        return stack.isEmpty();
     }
 
     public static void testAll() {

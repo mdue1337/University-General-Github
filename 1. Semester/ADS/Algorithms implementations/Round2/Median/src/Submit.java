@@ -10,10 +10,11 @@ public class Submit {
         // For BlueJ, ignore these comments
 
         // Add call to the test method here, to test the implementation
-        
+        //MedianTest.testAll();
+
         // Uncomment the following line, and add the needed task id, username and password
         // to submit the code to the server
-        submit("max", "ads25-dj1412", "x0802A6Xmu6tYVPj");
+        submit("median-2", "ads25-dj1412", "x0802A6Xmu6tYVPj");
     }
 
     private static void debug(String m) { /*System.out.println(m);*/ }
