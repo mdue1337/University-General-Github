@@ -1,3 +1,8 @@
+/**
+ * @author Martin Due & Mathias Bøttger
+ * @version 22/11-2025
+ */
+
 import java.util.Random;
 
 public class CapitalCity extends BorderCity {
@@ -7,8 +12,13 @@ public class CapitalCity extends BorderCity {
 
     @Override
     public int arrive(Player p){
+        int bonus = super.arrive(p);
+
         Random rng = p.getCountry().getGame().getRandom();
         int expenses = rng.nextInt(0, p.getMoney() + 1);
-        return super.arrive() - expenses;
+        p.setMoney(p.getMoney() - expenses);
+        changeValue(expenses);
+
+        return bonus - expenses;
     }
 }
