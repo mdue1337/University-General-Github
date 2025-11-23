@@ -18,6 +18,7 @@ public class Nail implements Comparable<Nail>
         this.length = length;
     } 
     
+    @Override
     public String toString(){
         return this.diameter + " mm x " + this.length + " mm of " + material;
     }

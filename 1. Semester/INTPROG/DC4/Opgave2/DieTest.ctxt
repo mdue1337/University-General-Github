@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=DieTest
+comment0.text=\r\n\ @author\ Martin\ Due\ &\ Mathis\ B\u00F8ttger\r\n\ @version\ 28/10-2025\r\n
+comment1.params=
+comment1.target=void\ testDieRoll()
+comment1.text=\r\n\ Fejl\ var\ at\ man\ glemte\ at\ tilf\u00F8je\ en\ efter\ at\ have\ RandomNum\ sides,\ da\ den\ bruger\ 0\ index.\r\n
+numComments=2

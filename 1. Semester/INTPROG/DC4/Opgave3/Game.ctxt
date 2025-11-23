@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Game
+comment0.text=\r\n\ Class\ for\ conducting\ a\ DieCup\ game\ between\ the\ computer\ and\ a\ user.\r\n\ \r\n\ @author\ Kurt\ Jensen\ \r\n\ @version\ 2020-07-15\r\n
+comment1.params=
+comment1.target=Game()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ TestDriver\r\n
+comment2.params=digits
+comment2.target=java.util.ArrayList\ createArrayList(int)
+comment2.text=\r\n\ Method\ for\ splitting\ an\ integer\ into\ digits\ and\ using\ these\r\n\ to\ construct\ an\ arraylist\ with\ Integer\ elements\ \r\n
+comment3.params=digits
+comment3.target=int\ play(int)
+comment3.text=\r\n\ Method\ for\ playing\ a\ game\ between\ the\ computer\ and\ the\ user\r\n
+numComments=4
