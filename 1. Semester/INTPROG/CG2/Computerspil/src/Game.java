@@ -1,17 +1,10 @@
-import java.awt.Point;
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList; 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+
 /**
  * A Game object is an instance of NordicTraveller.
  * @author Nikolaj Ignatieff Schwartzbach.

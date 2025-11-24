@@ -15,7 +15,7 @@ public class CapitalCity extends BorderCity {
         int bonus = super.arrive(p);
 
         Random rng = p.getCountry().getGame().getRandom();
-        int expenses = rng.nextInt(p.getMoney() + 1);
+        int expenses = rng.nextInt(0, p.getMoney() + 1);
         p.setMoney(p.getMoney() - expenses);
         changeValue(expenses);
 

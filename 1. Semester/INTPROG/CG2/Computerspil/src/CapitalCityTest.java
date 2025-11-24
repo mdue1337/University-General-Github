@@ -69,13 +69,13 @@ public class CapitalCityTest {
     @Test
     public void arriveFromOtherCountry() {
         for(int seed = 0; seed < 1000; seed++) {
-            Player player = new GUIPlayer(new Position(cityG, cityC, 0), 250);
+            Player player = new GUIPlayer(new Position(cityE, cityC, 0), 250);
             game.getRandom().setSeed(seed); // Set seed
 
             int bonus = country1.bonus(40); // Remember bonus
             int toll = 250 / 5; // 20% of 250
-            int expenses = game.getRandom().nextInt(250 + bonus - toll + 1);
-
+            Random random = game.getRandom();
+            int expenses = random.nextInt(0, player.getMoney() + 1);
             game.getRandom().setSeed(seed); // Reset seed
 
             assertEquals(bonus - toll - expenses, cityC.arrive(player)); // Same bonus
@@ -93,7 +93,7 @@ public class CapitalCityTest {
 
             int bonus = country1.bonus(100); // Remember bonus
             Random random = game.getRandom();
-            int expenses = random.nextInt(0, player.getMoney() + bonus + 1);
+            int expenses = random.nextInt(0, player.getMoney() + 1);
             game.getRandom().setSeed(seed); // Reset seed
 
             assertEquals(bonus - expenses, cityD.arrive(player)); // Same bonus

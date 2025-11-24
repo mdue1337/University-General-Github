@@ -18,6 +18,7 @@ public class Road implements Comparable<Road> {
      * @param from   the origin city (non\-null)
      * @param to     the destination city (non\-null)
      * @param length the road length in arbitrary units
+     * @return the Road object
      */
     public Road(City from, City to, int length) {
         this.from = from;
@@ -60,7 +61,7 @@ public class Road implements Comparable<Road> {
      */
     @Override
     public String toString() {
-        return from.getName() + " (" + from.getValue() + ") -> " + to.getName() + " (" + to.getValue() + ") : " + length;
+        return from.toString() + " -> " + to.toString() + " : " + length;
     }
 
     /**
@@ -113,6 +114,6 @@ public class Road implements Comparable<Road> {
     public int hashCode(){
         return 11 * this.from.hashCode() +
                 13 * this.to.hashCode() +
-                17 * this.length;
+                17 * Integer.hashCode(this.length);
     }
 }

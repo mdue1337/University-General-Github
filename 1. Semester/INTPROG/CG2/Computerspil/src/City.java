@@ -19,6 +19,7 @@ public class City implements Comparable<City> {
      * @param name  non-null city name
      * @param value initial value associated with this city
      * @param country non-null country name
+     * @return the city object
      */
     public City(String name, int value, Country country){
         this.name = name;
@@ -52,6 +53,11 @@ public class City implements Comparable<City> {
         return name;
     }
 
+    /**
+     * Returns the country name.
+     *
+     * @return the non-null country name
+     */
     public Country getCountry(){
         return country;
     }
@@ -75,10 +81,19 @@ public class City implements Comparable<City> {
     }
 
 
+    /**
+    * Subtracts the players recieved bonus from the city's value
+    * @return the players recieved bonus
+    */
     public int arrive(){
         int bonus = country.bonus(value);
         value -= bonus;
         return bonus;
+    }
+
+
+    public int arrive (Player p) {
+        return arrive();
     }
 
     /**
@@ -106,7 +121,7 @@ public class City implements Comparable<City> {
 
     /**
      * Indicates whether some other object is equal to this one.
-     * Equality is based on both `name` and current `value`.
+     * Equality is based on both `name` and 'country`.
      * <p>
      * Note: this may not be consistent with ordering, which compares by `name` only.
      *
@@ -123,12 +138,12 @@ public class City implements Comparable<City> {
 
     /**
      * Returns a hash code value for the object, consistent with `equals`,
-     * using both `name` and current `value`.
+     * using both `name` and `country`.
      *
      * @return the hash code
      */
     @Override
     public int hashCode() {
-        return 11 * this.name.hashCode() + 13 * this.country.getName().hashCode();
+        return 11 * this.name.hashCode() + 13 * country.hashCode();
     }
 }

@@ -1,5 +1,6 @@
-import java.awt.Color;
-import java.util.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Models a player which greedily chooses the next city to travel to (looking only one city ahead).

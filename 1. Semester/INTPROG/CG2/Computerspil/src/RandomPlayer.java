@@ -1,5 +1,4 @@
-import java.awt.Color;
-import java.util.List;
+import java.awt.*;
 import java.util.Set;
 /**
  * Models a player which randomly chooses the next city to travel to.

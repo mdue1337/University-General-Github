@@ -1,6 +1,6 @@
-import java.awt.Color;
-import java.util.Queue;
+import java.awt.*;
 import java.util.LinkedList;
+import java.util.Queue;
 /**
  * Write a description of class GUIPlayer here.
  *
