@@ -29,7 +29,7 @@ public class City implements Comparable<City> {
     }
 
     /**
-     * Adjusts the current `value` by the given delta.
+     * Adjusts the current `value` by the given amount.
      *
      * @param amount delta to add to the current `value` (may be negative)
      */
@@ -82,16 +82,25 @@ public class City implements Comparable<City> {
 
 
     /**
-    * Subtracts the players recieved bonus from the city's value
-    * @return the players recieved bonus
-    */
+     * Subtracts the players recieved bonus from the city's value.
+     *<p>That is unless The bonus is negative, because that means the mafia stole the money.</p>
+     *
+     * @return the players recieved bonus
+     */
     public int arrive(){
         int bonus = country.bonus(value);
-        value -= bonus;
+        if (bonus > 0) {
+            value -= bonus;
+        }
         return bonus;
     }
 
-
+    /**
+     * Calls arrive, ignores the parameter
+     *
+     * @param p Some player
+     * @return the players received bonus
+     */
     public int arrive (Player p) {
         return arrive();
     }

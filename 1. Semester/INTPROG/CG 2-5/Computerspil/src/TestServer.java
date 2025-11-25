@@ -1,20 +1,13 @@
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 import java.net.*;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.charset.*;
+import java.nio.file.*;
+import java.nio.channels.*;
+import java.util.*;
+import java.awt.Desktop;
+import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringJoiner;
 
 /**
  * This class is used to communicate with the test server.
@@ -34,12 +27,12 @@ public class TestServer {
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        testAndOpenInBrowser("CG3-2");
+        testAndOpenInBrowser("CG3");
     }
 
     /**
      * Downloads any available updates to the testserver file.
-     *
+     * 
      * @throws IOException
      */
     public static void updateTestServer() {
@@ -91,7 +84,7 @@ public class TestServer {
     /**
      * Checks if there is an update available, used in both the public method, and
      * the download method
-     *
+     * 
      * @return true when there is an update available, otherwise false.
      */
     private static boolean updateAvailable() {
@@ -128,7 +121,7 @@ public class TestServer {
 
     /**
      * Parses the version date of the testserver file specified in the inputstream
-     *
+     * 
      * @param testServerInputStream - An input stream to the testserver file
      * @return The version date of the given file, as a string. uuuu-MM-dd
      *         formatted.
@@ -151,7 +144,7 @@ public class TestServer {
 
     /**
      * Downloads the latest files from the course webpage.
-     *
+     * 
      * @param exercise one of: CG1, CG3, CG5
      */
     public static void download(String exercise) throws IOException {
@@ -192,7 +185,7 @@ public class TestServer {
     /**
      * Tests exercise and open the resulting link in the default browser (if
      * uploaded successfully).
-     *
+     * 
      * @param exercise Short name of exercise.
      */
     public static void testAndOpenInBrowser(String exercise) throws IOException, URISyntaxException {
@@ -206,7 +199,7 @@ public class TestServer {
     /**
      * Tests exercise in the classpath (the folder from which the program is
      * invoked).
-     *
+     * 
      * @param exercise Short name of exercise.
      */
     public static String test(String exercise) throws IOException {
@@ -604,7 +597,7 @@ public class TestServer {
 
     /**
      * This method downloads a variable number of files as specified by files.
-     *
+     * 
      * @param version The version of the files to download. One of: cg1, cg2, cg3.
      * @param files   The files to download.
      */
@@ -627,7 +620,7 @@ public class TestServer {
 
     /**
      * This method downloads a file from a url and saves it to the local machine.
-     *
+     * 
      * @param url  The url from which to download.
      * @param dest The destination of the downloaded file.
      */
@@ -645,7 +638,7 @@ public class TestServer {
     /**
      * This method sends an HTTP POST request to a specified location with some
      * arguments.
-     *
+     * 
      * @param location  URL to POST to.
      * @param arguments HTTP header arguments.
      * @return Response from the URL (if any).

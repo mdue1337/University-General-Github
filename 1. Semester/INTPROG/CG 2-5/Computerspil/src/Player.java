@@ -1,5 +1,6 @@
-import java.awt.*;
-
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.Set;
 /**
  * Models a Player which is controlled by the user via the GUI.
  * @author Nikolaj Ignatieff Schwartzbach. 
