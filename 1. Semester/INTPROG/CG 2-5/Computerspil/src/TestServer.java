@@ -27,7 +27,7 @@ public class TestServer {
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        testAndOpenInBrowser("CG3");
+        test("CG5");
     }
 
     /**

@@ -4,6 +4,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.*;
+import java.security.Key;
 import java.util.*;
 import java.util.List;
 import java.util.stream.*;
@@ -42,10 +43,13 @@ public class GUI {
     private JCheckBox random, greedy, smart;
     
     /** Textfields */
-    private JTextField tollSizeTextField, robberyTextField;
+    private JTextField tollSizeTextField, robberyTextField, minLossTextField, maxLossTextField;
+
+    /** JTextArea **/
+    private JTextArea choiceText;
     
     /** Buttons */
-    private JButton optionsButton, newGameButton, pauseResumeButton, abortButton;
+    private JButton optionsButton, newGameButton, pauseResumeButton, abortButton, playLogButton, saveLogButton;
     
     /** Reference to the Game instance */
     private Game game;
@@ -88,14 +92,23 @@ public class GUI {
      * Creates a Game instance autonomously.
      */
     private GUI(){
-        
         //Initialize Game
         game = Game.fromFile("network.dat");
+
+        // Text area
+        choiceText = new JTextArea(0,15);
+        choiceText.setText("User Choices:");
+        choiceText.setMargin(new Insets(10,10,10,10));
+        choiceText.setEditable(false);
+        JScrollPane userChoices = new JScrollPane(choiceText,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
         //Initialize buttons
         buttons = createButtonPanel();      
         options = createOptionsDialogBox();
-        
+        JMenuBar menuBar = makeMenuBar();
+
         //Initialize ActorPanel
         panel = new WorldPanel(game);
         panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -113,6 +126,7 @@ public class GUI {
                         double dist = Math.hypot(p.getX() - e.getX(), p.getY() - e.getY());
                         if(dist < WorldPanel.MIN_CIRCLE_RADIUS + 5){
                             game.clickCity(c);
+                            choiceText.append("\n • Step " + game.getStepsLeft() + ": " + c.getName());
                         }
                     }
                 }
@@ -173,9 +187,10 @@ public class GUI {
         
         //Initialize the super JPanel (which contains the other JPanels)
         superpanel = new JPanel();
-        superpanel.setLayout(new BoxLayout(superpanel, BoxLayout.Y_AXIS));
-        superpanel.add(panel);
-        superpanel.add(buttons);
+        superpanel.setLayout(new BorderLayout());
+        superpanel.add(panel, BorderLayout.CENTER);
+        superpanel.add(buttons, BorderLayout.SOUTH);
+        superpanel.add(userChoices, BorderLayout.EAST);
         
         //Initialize and setup the the JFrame
         mainFrame = new JFrame("Nordic Traveller - Introduktion til Programmering");
@@ -184,6 +199,7 @@ public class GUI {
         mainFrame.setResizable(false);
         mainFrame.setContentPane(superpanel);
         mainFrame.setVisible(true);
+        mainFrame.setJMenuBar(menuBar);
         
         panel.requestFocusInWindow();
         KeyListener kl = new KeyListener(){
@@ -213,9 +229,116 @@ public class GUI {
 
         //Apply existing settings to current game
         applyExistingSettings();
-                
+
+
     }
-    
+
+    private JMenuItem makeJMenuItem(String text, int keyCode, int modifiers, ActionListener action) {
+        JMenuItem item = new JMenuItem(text);
+        item.setAccelerator(KeyStroke.getKeyStroke(keyCode, modifiers));
+        item.addActionListener(action);
+        return item;
+    }
+
+
+    /**
+     * Used to insert into mainfraime to create MenuBar in top left.
+     * @return created MenuBar
+     */
+    private JMenuBar makeMenuBar(){
+        JMenuBar bar = new JMenuBar();
+        bar.add(makeGameMenu());
+        bar.add(makeLogMenu());
+
+        return bar;
+    }
+
+    /**
+     * Used to make the GameMenu
+     * @return gameMenu
+     */
+    private JMenu makeGameMenu(){
+        // Game
+        JMenu gameMenu = new JMenu("Game");
+
+        // New game
+        gameMenu.add(makeJMenuItem("New game", KeyEvent.VK_N, CTRL_SHIFT, e -> newGameButton.doClick()));
+
+        // Pause
+        gameMenu.add(makeJMenuItem("Pause/Resume game", KeyEvent.VK_P, CTRL_SHIFT, e -> pauseResumeButton.doClick()));
+
+        // Abort game
+        gameMenu.add(makeJMenuItem("Abort game", KeyEvent.VK_N, CTRL_SHIFT, e -> abortButton.doClick()));
+
+        // Options ...
+        gameMenu.add(makeJMenuItem("Options...", KeyEvent.VK_O, CTRL_SHIFT,e -> optionsButton.doClick()));
+
+        // Set speed
+        JMenu speedMenu = new JMenu("Set speed");
+        gameMenu.add(speedMenu);
+
+        // Different speeds
+        speedMenu.add(makeJMenuItem("Slow", KeyEvent.VK_1, CTRL, e -> setSpeed(1)));
+        speedMenu.add(makeJMenuItem("Medium", KeyEvent.VK_2, CTRL, e -> setSpeed(2)));
+        speedMenu.add(makeJMenuItem("Fast", KeyEvent.VK_3, CTRL,e -> setSpeed(3)));
+        speedMenu.add(makeJMenuItem("Sonic", KeyEvent.VK_4, CTRL,e -> setSpeed(4)));
+
+        return gameMenu;
+    }
+
+    /**
+     * Used to make LogMenu
+     * @return logMenu
+     */
+    private JMenu makeLogMenu(){
+        // Game
+        JMenu logMenu = new JMenu("Log");
+
+        // Play log
+        logMenu.add(makeJMenuItem("Play log...", KeyEvent.VK_L, CTRL_SHIFT, e -> playLog()));
+
+        // Save log
+        logMenu.add(makeJMenuItem("Save log...", KeyEvent.VK_S, CTRL_SHIFT, e -> saveLog()));
+
+        return logMenu;
+    }
+
+    /**
+     * Saves the log if the user approves.
+     */
+    public void saveLog(){
+        if(fileChooser.showSaveDialog(mainFrame) == JFileChooser.APPROVE_OPTION) {
+            try{
+                ObjectOutputStream os = new ObjectOutputStream(
+                                            new FileOutputStream(
+                                                    fileChooser.getSelectedFile()));
+                os.writeObject(game.getLog());
+                os.close();
+            }
+            catch (IOException e){
+                JOptionPane.showMessageDialog(mainFrame, "Error happened during saving, please try again or select another path", "Error while saving", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public void playLog(){
+        if(fileChooser.showOpenDialog(mainFrame) == JFileChooser.APPROVE_OPTION) {
+            try{
+                ObjectInputStream os = new ObjectInputStream(
+                                            new FileInputStream(
+                                                fileChooser.getSelectedFile()));
+
+                game.playLog((Log)os.readObject());
+            }
+            catch (IOException e){
+                JOptionPane.showMessageDialog(mainFrame, "Error happened while reading file, please try again or select a correct file", "Error while reading", JOptionPane.ERROR_MESSAGE);
+            }
+            catch(ClassNotFoundException e){
+                JOptionPane.showMessageDialog(mainFrame, "Log class was not found", "File was not a log-type", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
     /**
      * Returns the unsigned difference between two angles in the interval [-pi, pi].
      * @param a First angle
@@ -240,7 +363,9 @@ public class GUI {
         
             //Text-fields
             tollSizeTextField.setText(""+game.getSettings().getTollToBePaid());
-            robberyTextField.setText(""+game.getSettings().getRisk());    
+            robberyTextField.setText(""+game.getSettings().getRisk());
+            minLossTextField.setText(""+game.getSettings().getMinRobbery());
+            minLossTextField.setText(""+game.getSettings().getMaxRobbery());
         
             //Game speed
             speed = game.getSettings().getGameSpeed();
@@ -371,7 +496,7 @@ public class GUI {
     public JPanel createButtonPanel(){
         //Initialize the JPanel, using a GridLayout
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(1,4));                                  
+        buttons.setLayout(new GridLayout(2,3));
         
         //Instantiate the 'New'-button
         newGameButton = new JButton("New game");
@@ -400,7 +525,17 @@ public class GUI {
         optionsButton.setEnabled(false);
         optionsButton.addActionListener(e -> showOptions());
         buttons.add(optionsButton); 
-        
+
+        // Add the 'Play log...'
+        playLogButton = new JButton("Play log...");
+        playLogButton.addActionListener(e -> playLog());
+        buttons.add(playLogButton);
+
+        // Add the 'Play log...'
+        saveLogButton = new JButton("Save log...");
+        saveLogButton.addActionListener(e -> saveLog());
+        buttons.add(saveLogButton);
+
         //Return the JPanel
         return buttons;
     }
@@ -416,23 +551,47 @@ public class GUI {
         game.getSettings().setActive(2, smart.isSelected());
         
         //Toll size & robbery
-        int tollSize, riskRob = 0;
+        int tollSize, riskRob, minRobbery, maxRobbery = 0;
+        StringBuilder sb = new StringBuilder();
         try{
             tollSize = Integer.parseInt(tollSizeTextField.getText());
             riskRob  = Integer.parseInt(robberyTextField.getText());
-            if(tollSize < 0 || riskRob < 0 || tollSize > 50 || riskRob > 50){
-                JOptionPane.showMessageDialog(mainFrame, "'Toll size' and 'Risk rob' must be between 0 and 50.", "Malformed input", JOptionPane.ERROR_MESSAGE);
+            minRobbery = Integer.parseInt(minLossTextField.getText());
+            maxRobbery = Integer.parseInt(maxLossTextField.getText());
+
+            if(tollSize < 0 || tollSize > 50){
+                sb.append("'Toll size' must be between 0 and 50 \n" );
+            }
+
+            if(riskRob < 0 || riskRob > 50){
+                sb.append("'Risk rob' must be between 0 and 50 \n");
+            }
+
+            if(minRobbery < 0 || minRobbery > 100){
+                sb.append("'Min. loss when robbed' must be between 0 and 100 \n");
+            }
+
+            if(maxRobbery < 0 || maxRobbery > 100){
+                sb.append("'Max. loss when robbed' must be between 0 and 100 \n");
+            }
+
+            if(minRobbery > maxRobbery){
+                sb.append("'Min. loss when robbed' must be less than 'Max. loss when robbed'");
+            }
+
+            if(!sb.isEmpty()){
+                JOptionPane.showMessageDialog(mainFrame, sb.toString(), "Malformed input", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(mainFrame, "'Toll size' and 'Risk rob' must be integers.", "Malformed input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(mainFrame, "All inputs must be integers.", "Malformed input", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         game.getSettings().setRisk(riskRob);
         game.getSettings().setTollToBePaid(tollSize);
-       
-        
+        game.getSettings().setMinMaxRobbery(minRobbery, maxRobbery);
+
         mainFrame.setVisible(false);
         mainFrame.setVisible(true);
         mainFrame.repaint();
@@ -508,7 +667,7 @@ public class GUI {
         
         //Text input
         JPanel tollAndRobberyPanel = new JPanel();
-        tollAndRobberyPanel.setLayout(new GridLayout(2,3,5,5));                     
+        tollAndRobberyPanel.setLayout(new GridLayout(4,1,5,5));
         
         //Toll size
         JLabel tollSizeLabel = new JLabel("Toll to be paid:");
@@ -527,9 +686,28 @@ public class GUI {
         robberyTextField = new JTextField("20", 10);
         tollAndRobberyPanel.add(robberyTextField);
 
-        JLabel percrobbery = new JLabel("% in [0,50]");
-        tollAndRobberyPanel.add(percrobbery);
-        
+        JLabel percRobbery = new JLabel("% in [0,50]");
+        tollAndRobberyPanel.add(percRobbery);
+
+        // Min. loss when robbed
+        JLabel minRobbery = new JLabel("Min. loss when robbed:");
+        tollAndRobberyPanel.add(minRobbery);
+
+        minLossTextField = new JTextField("10", 10);
+        tollAndRobberyPanel.add(minLossTextField);
+
+        JLabel minPercRobbery = new JLabel("€ in [0,100]");
+        tollAndRobberyPanel.add(minPercRobbery);
+
+        // Max. loss when robbed
+        JLabel maxRobbery = new JLabel("Max. loss when robbed:");
+        tollAndRobberyPanel.add(maxRobbery);
+
+        maxLossTextField = new JTextField("50", 10);
+        tollAndRobberyPanel.add(maxLossTextField);
+
+        JLabel maxPercRobbery = new JLabel("€ in [0,100]");
+        tollAndRobberyPanel.add(maxPercRobbery);
         
         //Speed options
         JPanel speedPanel = new JPanel();
@@ -659,6 +837,7 @@ public class GUI {
         g.startGUI();
     }
 }
+
 /**
  * This class models the JPanel upon which the graphics are actually drawn.
  * This class handles the "nitty gritty" details of drawing all the roads, player icons etc.
