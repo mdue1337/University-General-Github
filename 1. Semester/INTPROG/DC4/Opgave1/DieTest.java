@@ -1,5 +1,3 @@
- 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.*;
@@ -10,10 +8,8 @@ import java.util.*;
  */
 
 public class DieTest {
-
     @Test
     public void testDieRoll(){
-        /// Assign
         for (int i = 2; i <= 10; i++) {
             Die d = new Die(i);
             Set<Integer> values = new HashSet<>();

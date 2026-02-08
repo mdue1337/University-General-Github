@@ -4,11 +4,6 @@ namespace LeetCode75
 {
     public class ArrayAndStrings
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine(GcdOfStrings("ABABAB", "ABAB"));
-        }
-
         public static string MergeAlternately(string word1, string word2)
         {
             StringBuilder word = new StringBuilder();
@@ -90,6 +85,82 @@ namespace LeetCode75
                 // Check if the repeated string matches the original
                 return built == full;
             }
+        }
+
+        public static IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+        {
+            bool[] result = new bool[candies.Length];
+            int maxCandies = candies.Max();
+
+            for (int i = 0; i < candies.Length; i++)
+            {
+                result[i] = candies[i] + extraCandies >= maxCandies;
+            }
+
+            return result;
+        }
+
+        public static bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            if (n == 0) return true;
+
+            for (int i = 0; i < flowerbed.Length; i++)
+            {
+                if (flowerbed[i] == 0)
+                {
+                    bool left = (i == 0 || flowerbed[i - 1] == 0);
+                    bool right = (i == flowerbed.Length - 1 || flowerbed[i + 1] == 0);
+
+                    if (left && right)
+                    {
+                        flowerbed[i] = 1;
+                        n--;
+                        if (n == 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public static string ReverseVowels(string s)
+        {
+            HashSet<char> vowels = new HashSet<char>()
+            {
+                'A', 'a',
+                'E', 'e',
+                'I', 'i',
+                'O', 'o',
+                'U', 'u'
+            };
+
+            Dictionary<int, char> keyValuePairs = new Dictionary<int, char>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (vowels.Contains(s[i]))
+                {
+                    keyValuePairs[i] = s[i];
+                }
+            }
+
+            List<int> vowelIndexes = keyValuePairs.Keys.OrderBy(i => i).ToList();
+            List<char> reversedVowels = vowelIndexes
+                .Select(i => keyValuePairs[i])
+                .Reverse()
+                .ToList();
+
+            StringBuilder sb = new StringBuilder(s);
+
+            for (int i = 0; i < vowelIndexes.Count; i++)
+            {
+                sb[vowelIndexes[i]] = reversedVowels[i];
+            }
+
+            return sb.ToString();
         }
     }
 }

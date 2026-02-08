@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode 75\\LeetCode75\\LeetCode75\\LeetCode75.csproj",
+      "projectUniqueName": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode\\LeetCode75\\LeetCode75\\LeetCode75.csproj",
       "projectName": "LeetCode75",
-      "projectPath": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode 75\\LeetCode75\\LeetCode75\\LeetCode75.csproj",
+      "projectPath": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode\\LeetCode75\\LeetCode75\\LeetCode75.csproj",
       "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode 75\\LeetCode75\\LeetCode75\\obj\\",
+      "outputPath": "C:\\Users\\marti\\OneDrive - Aarhus universitet\\Computer_Science-Masters-Github\\Leetcode\\LeetCode75\\LeetCode75\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config",

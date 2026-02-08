@@ -1,12 +1,12 @@
 #BlueJ package file
-dependency1.from=DieTest
+dependency1.from=DieCup
 dependency1.to=Die
 dependency1.type=UsesDependency
-dependency2.from=DieCup
-dependency2.to=Die
+dependency2.from=DieCupTest
+dependency2.to=DieCup
 dependency2.type=UsesDependency
-dependency3.from=DieCupTest
-dependency3.to=DieCup
+dependency3.from=DieTest
+dependency3.to=Die
 dependency3.type=UsesDependency
 editor.fx.0.height=737
 editor.fx.0.width=814
